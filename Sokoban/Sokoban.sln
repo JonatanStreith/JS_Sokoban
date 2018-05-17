@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2005
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ADD0CED6-49D3-4B8C-A5F1-53F444CF348B}"
+	ProjectSection(SolutionItems) = preProject
+		JS_Sokoban.html = JS_Sokoban.html
+		css\main.css = css\main.css
+		js\settings.js = js\settings.js
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {81884F43-D6CF-456E-8AF9-5F0E239F4B8B}
+	EndGlobalSection
+EndGlobal

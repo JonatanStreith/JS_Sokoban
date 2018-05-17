@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/main.css">
+
+    <title>Sokoban</title>
+</head>
+<body>
+
+    <div id="GameField">
+        <table id="GameTable" cellpadding="0"></table>
+
+
+        <div id="DataTable">
+
+        </div>
+    </div>
+
+
+
+
+    <script src="C:\Users\Lexicon\source\repos\JS_Sokoban\Sokoban\js\settings.js"></script>
+
+    <script>
+
+        var gameTable = document.getElementById("GameTable");
+
+        var originalMap = mapsArray[0].mapGrid;
+        var currentMap = originalMap;
+
+
+
+
+
+        DrawTheMap();
+
+
+        var playerPosition = GetPlayerPosition();  //Sets the player's position
+
+
+        alert("Currently at " + playerPosition[0] + " and " + playerPosition[1])
+
+
+        //38 upp, 40 ner, 39 höger, 37 vänster
+
+        document.addEventListener("keydown", keyResponse);
+
+        function keyResponse(k) {
+
+            //if ([37, 38, 39, 40].indexOf(k.keyCode)) { k.preventDefault();}
+
+            if (k.keyCode == 38) {
+                MoveTo(-1, 0, "up");
+                k.preventDefault();
+            }      //Up
+            else if (k.keyCode == 40) {
+                MoveTo(1, 0, "down");
+                k.preventDefault();
+            }   //Down
+            else if (k.keyCode == 37) {
+                MoveTo(0, -1, "left");
+                k.preventDefault();
+            }   //Left
+            else if (k.keyCode == 39) {
+                MoveTo(0, 1, "right");
+                k.preventDefault();
+            }  //Right
+        }
+
+
+
+
+        function MoveTo(y, x, direction) {
+            var table = document.getElementById("GameTable");  //Get a fresh copy of the table layout
+            var currentCell = table.rows[playerPosition[0]].cells[playerPosition[1]];
+            var nextCell = table.rows[playerPosition[0] + y].cells[playerPosition[1] + x];
+
+            switch (nextCell.getAttribute("id")) {
+
+                case "wall":
+                    alert("Wall!")
+                    break;
+
+                case "box":
+                    alert("Box!")
+
+                    break;
+
+                case "goal":
+
+                    break;
+
+                case "blank":
+
+
+                    var player = document.createElement("img");
+                    player.src = "imgs/player.gif";
+                    player.width = 36;
+                    player.height = 36;
+
+                    nextCell.removeChild(nextCell.firstChild);
+                    nextCell.appendChild(player);
+
+
+
+                    var blank = document.createElement("img");
+                    blank.src = "imgs/blank.gif";
+                    blank.width = 36;
+                    blank.height = 36;
+
+                    currentCell.removeChild(currentCell.firstChild);
+                    currentCell.appendChild(blank);
+
+                    playerPosition[0] = playerPosition[0] + y;
+                    playerPosition[1] = playerPosition[1] + x;
+
+
+                    break;
+
+
+                default:
+                    break;
+            }
+
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        function GetPlayerPosition() {
+
+            for (var i = 0; i < currentMap.length; i++) {
+
+                for (var j = 0; j < currentMap[i].length; j++) {
+
+                    if (currentMap[i][j] == 'P') {
+                        return [i, j];
+                    }
+
+
+                }
+
+            }
+        }
+
+
+
+        function DrawTheMap() {
+
+            for (var i = 0; i < originalMap.length; i++) {
+
+                //create a new row
+                var row = gameTable.insertRow(i);
+
+                for (var j = 0; j < originalMap[i].length; j++) {
+
+                    //create a new cell
+
+                    var cell = row.insertCell(j);
+
+
+                    if (originalMap[i][j] == 'W') {
+
+                        var wall = document.createElement("img");
+                        wall.src = "imgs/wall.gif";
+                        wall.width = 36;
+                        wall.height = 36;
+
+
+
+                        cell.appendChild(wall);
+                        cell.id = "wall";
+                    }
+
+                    if (originalMap[i][j] == ' ') {
+
+                        var blank = document.createElement("img");
+                        blank.src = "imgs/blank.gif";
+                        blank.width = 36;
+                        blank.height = 36;
+
+                        cell.appendChild(blank);
+                        cell.id = "blank";
+
+                    }
+
+
+                    if (originalMap[i][j] == 'B') {
+
+                        var box = document.createElement("img");
+                        box.src = "imgs/box.gif";
+                        box.width = 36;
+                        box.height = 36;
+
+
+                        cell.appendChild(box);
+                        cell.id = "box";
+
+                    }
+
+                    if (originalMap[i][j] == 'G') {
+
+                        var goal = document.createElement("img");
+                        goal.src = "imgs/goal.gif";
+                        goal.width = 36;
+                        goal.height = 36;
+
+
+                        cell.appendChild(goal);
+                        cell.id = "goal";
+
+                    }
+
+                    if (originalMap[i][j] == 'P') {
+
+                        var player = document.createElement("img");
+                        player.src = "imgs/player.gif";
+                        player.width = 36;
+                        player.height = 36;
+
+
+                        cell.appendChild(player);
+                        cell.id = "player";
+
+                    }
+
+
+
+
+                }
+            }
+        }
+
+
+    </script>
+
+</body>
+</html>

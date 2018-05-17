@@ -1,0 +1,33 @@
+
+img {
+    display: block;
+    border: 0;
+    margin: 0;
+    padding: 0;
+    /* height: 64px;
+    width: 64px; */
+}
+
+
+#GameField {
+    background-color: lightgrey;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+#DataTable {
+    background-color: lightgrey;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+
+#GameTable{
+
+    border-collapse: collapse;
+    empty-cells: show;
+    padding: 0;
+    margin: 0;
+    height: 64px;
+
+}
