@@ -10,24 +10,28 @@ img {
 
 
 #GameField {
+    display: flex;
     background-color: lightgrey;
     border: 1px solid black;
     padding: 10px;
 }
 
-#DataTable {
-    background-color: lightgrey;
-    border: 1px solid black;
-    padding: 10px;
-}
 
 
 #GameTable{
-
+    float: left;
     border-collapse: collapse;
     empty-cells: show;
     padding: 0;
     margin: 0;
     height: 64px;
 
+}
+
+#DataTable {
+    width: 30%;
+    float: right;
+    background-color: lightgrey;
+    border: 1px solid black;
+    padding: 10px;
 }

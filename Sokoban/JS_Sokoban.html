@@ -14,9 +14,26 @@
 
 
         <div id="DataTable">
-
+            <p>Number of boxes in place: <span id="boxes placed">0</span></p>
+            <p>Number of moves: <span id="moves">0</span></p>
+            <p><span id="victory"></span></p>
         </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -31,9 +48,13 @@
         var currentMap = originalMap;
 
 
+        var numberOfGoals = 0;
+        var boxesInPlace = 0;
+        var numberOfMoves = 0;
 
 
         DrawTheMap();
+
 
 
         var playerPosition = GetPlayerPosition();  //Sets the player's position
@@ -65,9 +86,22 @@
                 MoveTo(0, 1, "right");
                 k.preventDefault();
             }  //Right
+
+            numberOfMoves += 1;
+            UpdateNumbers();
         }
 
 
+        function UpdateNumbers() {
+
+            document.getElementById('moves').innerHTML = numberOfMoves;
+            document.getElementById('boxes placed').innerHTML = boxesInPlace;
+
+            if (boxesInPlace >= numberOfGoals) {
+                document.getElementById('victory').innerHTML = "Level complete!";
+            }
+
+        }
 
 
         function MoveTo(y, x, direction) {
@@ -204,6 +238,7 @@
                             playerPosition[0] = playerPosition[0] + y;
                             playerPosition[1] = playerPosition[1] + x;
 
+                            boxesInPlace += 1;
 
 
 
@@ -292,7 +327,7 @@
 
                             playerPosition[0] = playerPosition[0] + y;
                             playerPosition[1] = playerPosition[1] + x;
-
+                            boxesInPlace -= 1;
 
                             break;
 
@@ -572,6 +607,8 @@
 
                         cell.appendChild(goal);
                         cell.id = "goal";
+
+                        numberOfGoals += 1;
 
                     }
 
