@@ -33,14 +33,12 @@
 
 
 
-
         DrawTheMap();
 
 
         var playerPosition = GetPlayerPosition();  //Sets the player's position
 
 
-        alert("Currently at " + playerPosition[0] + " and " + playerPosition[1])
 
 
         //38 upp, 40 ner, 39 höger, 37 vänster
@@ -76,19 +74,357 @@
             var table = document.getElementById("GameTable");  //Get a fresh copy of the table layout
             var currentCell = table.rows[playerPosition[0]].cells[playerPosition[1]];
             var nextCell = table.rows[playerPosition[0] + y].cells[playerPosition[1] + x];
+            var nextNextCell = table.rows[playerPosition[0] + y + y].cells[playerPosition[1] + x + x]
+
 
             switch (nextCell.getAttribute("id")) {
 
                 case "wall":
-                    alert("Wall!")
+                    //do nothing
                     break;
 
                 case "box":
-                    alert("Box!")
+
+                    switch (nextNextCell.getAttribute("id")) {
+                        case "wall":
+                            //do nothing            //Saving these slots in case they need to be used, and to show that they exist
+                            break;
+
+                        case "box":
+                            //do nothing
+                            break;
+
+                        case "box_placed":
+                            //do nothing
+                            break;
+
+                        case "blank":
+
+                            var box = document.createElement("img");
+                            box.src = "imgs/box.gif";
+                            box.width = 36;
+                            box.height = 36;
+
+                            nextNextCell.removeChild(nextNextCell.firstChild);
+                            nextNextCell.appendChild(box);
+                            nextNextCell.id = "box";
+
+
+                            var player = document.createElement("img");
+                            player.src = "imgs/player.gif";
+                            player.width = 36;
+                            player.height = 36;
+
+                            nextCell.removeChild(nextCell.firstChild);
+                            nextCell.appendChild(player);
+                            nextCell.id = "player";
+
+
+                            if (currentCell.id == "player on goal") {
+
+                                var goal = document.createElement("img");
+                                goal.src = "imgs/goal.gif";
+                                goal.width = 36;
+                                goal.height = 36;
+
+                                currentCell.removeChild(currentCell.firstChild);
+                                currentCell.appendChild(goal);
+                                currentCell.id = "goal";
+                            }
+                            else {
+                                var blank = document.createElement("img");
+                                blank.src = "imgs/blank.gif";
+                                blank.width = 36;
+                                blank.height = 36;
+
+                                currentCell.removeChild(currentCell.firstChild);
+                                currentCell.appendChild(blank);
+                                currentCell.id = "blank";
+
+                            }
+
+
+                            playerPosition[0] = playerPosition[0] + y;
+                            playerPosition[1] = playerPosition[1] + x;
+
+
+                            break;
+
+
+
+                        case "goal":
+
+
+
+
+                            var box_placed = document.createElement("img");
+                            box_placed.src = "imgs/box_placed.gif";
+                            box_placed.width = 36;
+                            box_placed.height = 36;
+
+                            nextNextCell.removeChild(nextNextCell.firstChild);
+                            nextNextCell.appendChild(box_placed);
+                            nextNextCell.id = "box_placed";
+
+
+                            var player = document.createElement("img");
+                            player.src = "imgs/player.gif";
+                            player.width = 36;
+                            player.height = 36;
+
+                            nextCell.removeChild(nextCell.firstChild);
+                            nextCell.appendChild(player);
+                            nextCell.id = "player";
+
+
+                            if (currentCell.id == "player on goal") {
+
+                                var goal = document.createElement("img");
+                                goal.src = "imgs/goal.gif";
+                                goal.width = 36;
+                                goal.height = 36;
+
+                                currentCell.removeChild(currentCell.firstChild);
+                                currentCell.appendChild(goal);
+                                currentCell.id = "goal";
+                            }
+                            else {
+                                var blank = document.createElement("img");
+                                blank.src = "imgs/blank.gif";
+                                blank.width = 36;
+                                blank.height = 36;
+
+                                currentCell.removeChild(currentCell.firstChild);
+                                currentCell.appendChild(blank);
+                                currentCell.id = "blank";
+
+                            }
+
+
+                            playerPosition[0] = playerPosition[0] + y;
+                            playerPosition[1] = playerPosition[1] + x;
+
+
+
+
+
+
+
+
+
+
+                            break;
+
+
+
+                        default:
+
+                            break;
+
+
+                    }
+
 
                     break;
 
+
+
+                case "box_placed":
+
+                    switch (nextNextCell.getAttribute("id")) {
+                        case "wall":
+                            //do nothing            
+                            break;
+
+                        case "box":
+                            //do nothing
+                            break;
+
+                        case "box_placed":
+                            //do nothing
+                            break;
+
+                        case "blank":
+
+                            var box = document.createElement("img");
+                            box.src = "imgs/box.gif";
+                            box.width = 36;
+                            box.height = 36;
+
+                            nextNextCell.removeChild(nextNextCell.firstChild);
+                            nextNextCell.appendChild(box);
+                            nextNextCell.id = "box";
+
+
+                            var player = document.createElement("img");
+                            player.src = "imgs/player.gif";
+                            player.width = 36;
+                            player.height = 36;
+
+                            nextCell.removeChild(nextCell.firstChild);
+                            nextCell.appendChild(player);
+                            nextCell.id = "player on goal";
+
+
+                            if (currentCell.id == "player on goal") {
+
+                                var goal = document.createElement("img");
+                                goal.src = "imgs/goal.gif";
+                                goal.width = 36;
+                                goal.height = 36;
+
+                                currentCell.removeChild(currentCell.firstChild);
+                                currentCell.appendChild(goal);
+                                currentCell.id = "goal";
+                            }
+                            else {
+                                var blank = document.createElement("img");
+                                blank.src = "imgs/blank.gif";
+                                blank.width = 36;
+                                blank.height = 36;
+
+                                currentCell.removeChild(currentCell.firstChild);
+                                currentCell.appendChild(blank);
+                                currentCell.id = "blank";
+
+                            }
+
+
+                            playerPosition[0] = playerPosition[0] + y;
+                            playerPosition[1] = playerPosition[1] + x;
+
+
+                            break;
+
+
+
+                        case "goal":
+
+
+
+
+                            var box_placed = document.createElement("img");
+                            box_placed.src = "imgs/box_placed.gif";
+                            box_placed.width = 36;
+                            box_placed.height = 36;
+
+                            nextNextCell.removeChild(nextNextCell.firstChild);
+                            nextNextCell.appendChild(box_placed);
+                            nextNextCell.id = "box_placed";
+
+
+                            var player = document.createElement("img");
+                            player.src = "imgs/player.gif";
+                            player.width = 36;
+                            player.height = 36;
+
+                            nextCell.removeChild(nextCell.firstChild);
+                            nextCell.appendChild(player);
+                            nextCell.id = "player on goal";
+
+
+                            if (currentCell.id == "player on goal") {
+
+                                var goal = document.createElement("img");
+                                goal.src = "imgs/goal.gif";
+                                goal.width = 36;
+                                goal.height = 36;
+
+                                currentCell.removeChild(currentCell.firstChild);
+                                currentCell.appendChild(goal);
+                                currentCell.id = "goal";
+                            }
+                            else {
+                                var blank = document.createElement("img");
+                                blank.src = "imgs/blank.gif";
+                                blank.width = 36;
+                                blank.height = 36;
+
+                                currentCell.removeChild(currentCell.firstChild);
+                                currentCell.appendChild(blank);
+                                currentCell.id = "blank";
+
+                            }
+
+
+                            playerPosition[0] = playerPosition[0] + y;
+                            playerPosition[1] = playerPosition[1] + x;
+
+
+
+
+
+
+
+
+
+
+                            break;
+
+
+
+                        default:
+
+                            break;
+
+
+                    }
+
+
+                    break;
+
+
+
+
+
+
+
+
                 case "goal":
+
+                    var player = document.createElement("img");
+                    player.src = "imgs/player.gif";
+                    player.width = 36;
+                    player.height = 36;
+
+                    nextCell.removeChild(nextCell.firstChild);
+                    nextCell.appendChild(player);
+                    nextCell.id = "player on goal";
+
+
+
+
+                    if (currentCell.id == "player on goal") {
+
+                        var goal = document.createElement("img");
+                        goal.src = "imgs/goal.gif";
+                        goal.width = 36;
+                        goal.height = 36;
+
+                        currentCell.removeChild(currentCell.firstChild);
+                        currentCell.appendChild(goal);
+                        currentCell.id = "goal";
+                    }
+                    else {
+                        var blank = document.createElement("img");
+                        blank.src = "imgs/blank.gif";
+                        blank.width = 36;
+                        blank.height = 36;
+
+                        currentCell.removeChild(currentCell.firstChild);
+                        currentCell.appendChild(blank);
+                        currentCell.id = "blank";
+
+                    }
+
+
+
+                    playerPosition[0] = playerPosition[0] + y;
+                    playerPosition[1] = playerPosition[1] + x;
+
+
+
+
 
                     break;
 
@@ -102,16 +438,33 @@
 
                     nextCell.removeChild(nextCell.firstChild);
                     nextCell.appendChild(player);
+                    nextCell.id = "player";
 
 
 
-                    var blank = document.createElement("img");
-                    blank.src = "imgs/blank.gif";
-                    blank.width = 36;
-                    blank.height = 36;
+                    if (currentCell.id == "player on goal") {
 
-                    currentCell.removeChild(currentCell.firstChild);
-                    currentCell.appendChild(blank);
+                        var goal = document.createElement("img");
+                        goal.src = "imgs/goal.gif";
+                        goal.width = 36;
+                        goal.height = 36;
+
+                        currentCell.removeChild(currentCell.firstChild);
+                        currentCell.appendChild(goal);
+                        currentCell.id = "goal";
+                    }
+                    else {
+                        var blank = document.createElement("img");
+                        blank.src = "imgs/blank.gif";
+                        blank.width = 36;
+                        blank.height = 36;
+
+                        currentCell.removeChild(currentCell.firstChild);
+                        currentCell.appendChild(blank);
+                        currentCell.id = "blank";
+
+                    }
+
 
                     playerPosition[0] = playerPosition[0] + y;
                     playerPosition[1] = playerPosition[1] + x;
