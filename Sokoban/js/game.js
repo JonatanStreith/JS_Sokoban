@@ -1,7 +1,8 @@
 var gameTable = document.getElementById("GameTable");
 
-var originalMap = tileMap.mapGrid;
-var currentMap = originalMap;
+
+var originalMap;
+var currentMap;
 
 
 var numberOfGoals;
@@ -9,6 +10,7 @@ var boxesInPlace;
 var numberOfMoves;
 var playerPosition;  
 
+var gameOver;
 
 DrawTheMap();
 
@@ -29,24 +31,27 @@ function keyResponse(k) {
 
     //if ([37, 38, 39, 40].indexOf(k.keyCode)) { k.preventDefault();}
 
-    if (k.keyCode == 38) {
-        MoveTo(-1, 0, "up");
-        k.preventDefault();
-    }      //Up
-    else if (k.keyCode == 40) {
-        MoveTo(1, 0, "down");
-        k.preventDefault();
-    }   //Down
-    else if (k.keyCode == 37) {
-        MoveTo(0, -1, "left");
-        k.preventDefault();
-    }   //Left
-    else if (k.keyCode == 39) {
-        MoveTo(0, 1, "right");
-        k.preventDefault();
-    }  //Right
+    if (!gameOver) {
 
-    UpdateNumbers();
+        if (k.keyCode == 38) {
+            MoveTo(-1, 0, "up");
+            k.preventDefault();
+        }      //Up
+        else if (k.keyCode == 40) {
+            MoveTo(1, 0, "down");
+            k.preventDefault();
+        }   //Down
+        else if (k.keyCode == 37) {
+            MoveTo(0, -1, "left");
+            k.preventDefault();
+        }   //Left
+        else if (k.keyCode == 39) {
+            MoveTo(0, 1, "right");
+            k.preventDefault();
+        }  //Right
+
+        UpdateNumbers();
+    }
 }
 
 
@@ -57,7 +62,12 @@ function UpdateNumbers() {
 
     if (boxesInPlace >= numberOfGoals) {
         document.getElementById('victory').innerHTML = "Level complete!";
+        gameOver = true;
     }
+    if (boxesInPlace < numberOfGoals) {
+        document.getElementById('victory').innerHTML = "Move boxes!";
+    }
+
 
 }
 
@@ -527,7 +537,12 @@ function DrawTheMap() {
     numberOfGoals = 0;
     boxesInPlace = 0;
     numberOfMoves = 0;
+    gameOver = false;
 
+    var randomMap = mapsArray[Math.floor(Math.random() * mapsArray.length)];
+
+    originalMap = randomMap.mapGrid;
+    currentMap = originalMap;
 
 
     for (var i = 0; i < originalMap.length; i++) {
